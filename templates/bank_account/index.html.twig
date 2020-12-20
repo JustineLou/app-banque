@@ -12,8 +12,6 @@
                 <th>Utilisateurs</th>
                 <th>IBAN</th>
                 <th>Solde initial</th>
-                <th>Crédit</th>
-                <th>Débit</th>
                 <th></th>
             </tr>
         </thead>
@@ -39,6 +37,9 @@
     </table>
 
     <a href="{{ path('bank_account_new') }}">Ajouter un compte bancaire</a><br>
-    <a href="/admin">Retour à l'espace administrateur</a>
+    
+        <button type="button" class="btn btn-light"><a href="/">retour à l'espace administrateur</a></button>
+
+    
 
 {% endblock %}

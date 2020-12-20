@@ -9,6 +9,7 @@ use Symfony\Component\Form\Extension\Core\Type\PasswordType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use App\Entity\BankAccount;
+use Symfony\Component\Form\Extension\Core\Type\DateType;
 
 
 class UserType extends AbstractType

@@ -3,36 +3,32 @@
 {% block title %}Compte bancaire de {{ bank_account.user }}{% endblock %}
 
 {% block body %}
-    <h1>Compte bancaire de {{ bank_account.user }}</h1>
+<h1>Compte bancaire de {{ bank_account.user }}</h1>
 
-    <table class="table">
-        <tbody>
-            <tr>
-                <th>Id</th>
-                <td>{{ bank_account.id }}</td>
-            </tr>
-            <tr>
-                <th>IBAN</th>
-                <td>{{ bank_account.IBAN }}</td>
-            </tr>
-            <tr>
-                <th>Balance initiale</th>
-                <td>{{ bank_account.InitialBalance }}</td>
-            </tr>
-            <tr>
-                <th>Crédit</th>
-                <td>{{ bank_account.CreditTransaction }}</td>
-            </tr>
-            <tr>
-                <th>Débit</th>
-                <td>{{ bank_account.DebitTransaction }}</td>
-            </tr>
-        </tbody>
-    </table>
+<table class="table">
+    <tbody>
+        <tr>
+            <th>Id</th>
+            <td>{{ bank_account.id }}</td>
+        </tr>
+        <tr>
+            <th>IBAN</th>
+            <td>{{ bank_account.IBAN }}</td>
+        </tr>
+        <tr>
+            <th>Balance initiale</th>
+            <td>{{ bank_account.InitialBalance }}</td>
+        </tr>
+        <tr>
+    </tbody>
+</table>
 
-    <a href="{{ path('bank_account_index') }}">Retour à la liste des comptes</a><br>
 
-    <a href="{{ path('bank_account_edit', {'id': bank_account.id}) }}">Editer</a>
+<button type="button" class="btn btn-light"><a href="{{ path('bank_account_index') }}">Retour à la liste des
+        comptes</a></button><br>
 
-    {{ include('bank_account/_delete_form.html.twig') }}
+
+<a href="{{ path('bank_account_edit', {'id': bank_account.id}) }}">Editer</a>
+
+{{ include('bank_account/_delete_form.html.twig') }}
 {% endblock %}

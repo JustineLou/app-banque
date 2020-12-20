@@ -21,8 +21,8 @@
                 <td>{{ transaction.amount }}</td>
                 <td>{{ transaction.date ? transaction.date|date('Y-m-d') : '' }}</td>
                 <td>
-                    <a href="{{ path('transaction_show', {'id': transaction.id}) }}">show</a>
-                    <a href="{{ path('transaction_edit', {'id': transaction.id}) }}">edit</a>
+                    <a href="{{ path('transaction_show', {'id': transaction.id}) }}">afficher</a>
+                    <a href="{{ path('transaction_edit', {'id': transaction.id}) }}">éditer</a>
                 </td>
             </tr>
         {% else %}
@@ -33,5 +33,7 @@
         </tbody>
     </table>
 
-    <a href="{{ path('transaction_new', { 'id': app.user.id }) }}">Create new</a>
+    <a href="{{ path('transaction_new', { 'id': app.user.id }) }}">Effectuer une nouvelle transaction</a>
+    <button type="button" class="btn btn-light"><a href="{{ path('index') }}">retour à mon espace utilisateur</a></button>
+
 {% endblock %}

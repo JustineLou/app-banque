@@ -56,7 +56,9 @@
     {% endfor %} #}
 
 
-<a href="{{ path('user_index') }}">back to list</a>
+
+    <button type="button" class="btn btn-light"><a href="{{ path('user_index') }}">retour</a></button>
+
 
 <a href="{{ path('user_edit', {'id': user.id}) }}">edit</a>
 

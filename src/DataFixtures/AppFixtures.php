@@ -27,7 +27,7 @@ class AppFixtures extends Fixture
         $user->setRoles(['ROLE_ADMIN']);
         $user->setPassword($this->passwordEncoder->encodePassword(
             $user,
-            '1234'
+            'admin'
         ));
         $manager->persist($user);
 
@@ -39,7 +39,7 @@ class AppFixtures extends Fixture
         $user->setRoles(['ROLE_USER']);
         $user->setPassword($this->passwordEncoder->encodePassword(
             $user,
-            '5678'
+            'user1'
         ));
         $manager->persist($user);
 
@@ -51,7 +51,7 @@ class AppFixtures extends Fixture
         $user->setRoles(['ROLE_USER']);
         $user->setPassword($this->passwordEncoder->encodePassword(
             $user,
-            '9874'
+            'user2'
         ));
         $manager->persist($user);
 
