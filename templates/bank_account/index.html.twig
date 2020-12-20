@@ -1,0 +1,44 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Liste des comptes bancaires{% endblock %}
+
+{% block body %}
+    <h1>Comptes bancaires</h1>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Utilisateurs</th>
+                <th>IBAN</th>
+                <th>Solde initial</th>
+                <th>Crédit</th>
+                <th>Débit</th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for bank_account in bank_accounts %}
+            <tr>
+            
+                <td>{{ bank_account.id }}</td>
+                <td>{{ bank_account.user }}</td>
+                <td>{{ bank_account.IBAN }}</td>
+                <td>{{ bank_account.InitialBalance }}</td>
+                <td>
+                    <a href="{{ path('bank_account_show', {'id': bank_account.id}) }}">afficher</a>
+                    <a href="{{ path('bank_account_edit', {'id': bank_account.id}) }}">éditer</a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="6">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <a href="{{ path('bank_account_new') }}">Ajouter un compte bancaire</a><br>
+    <a href="/admin">Retour à l'espace administrateur</a>
+
+{% endblock %}

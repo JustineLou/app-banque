@@ -1,0 +1,74 @@
+<?php
+
+namespace App\Controller;
+
+use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Component\Security\Http\Authentication\AuthenticationUtils;
+
+class SecurityController extends AbstractController
+{
+    /**
+     * @Route("/login", name="app_login")
+     */
+    public function login(AuthenticationUtils $authenticationUtils): Response
+    {
+        if($this->isGranted('ROLE_ADMIN'))
+        {
+            return $this->redirectToRoute('admin');
+        }
+
+        // get the login error if there is one
+        $error = $authenticationUtils->getLastAuthenticationError();
+        // last username entered by the user
+        $lastUsername = $authenticationUtils->getLastUsername();
+
+        return $this->render('security/login.html.twig', ['last_username' => $lastUsername, 'error' => $error]);
+    }
+
+    /**
+     * @Route("/logout", name="app_logout")
+     */
+    public function logout()
+    {
+        throw new \LogicException('This method can be blank - it will be intercepted by the logout key on your firewall.');
+    }
+
+// /**
+//  * Redirect users after login based on the granted ROLE
+//  * @Route("/login/redirect", name="_login_redirect")
+//  */
+// public function loginRedirectAction(Request $request)
+// {
+//     if($this->isGranted('ROLE_ADMIN'))
+//     {
+//         return $this->redirectToRoute('admin');
+//     }
+
+//     else
+//     {
+//         return $this->redirectToRoute('user_index');
+//     }
+// }
+
+public function loginAction()
+{
+  if ($this->get('security.context')->isGranted('ROLE_ADMIN')) {
+    return $this->redirect($this->generateUrl('admin'));
+
+  }
+
+
+  $request = $this->getRequest();
+  $session = $request->getSession();
+
+  // On vérifie s'il y a des erreurs d'une précédent soumission du formulaire
+  if ($request->attributes->has(SecurityContext::AUTHENTICATION_ERROR)) {
+    $error = $request->attributes->get(SecurityContext::AUTHENTICATION_ERROR);
+  } else {
+    $error = $session->get(SecurityContext::AUTHENTICATION_ERROR);
+    $session->remove(SecurityContext::AUTHENTICATION_ERROR);
+  }
+}
+}

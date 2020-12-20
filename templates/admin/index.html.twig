@@ -1,0 +1,37 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Compte administrateur{% endblock %}
+
+{% block body %}
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+  <a class="navbar-brand" href="#">Administration application bancaire</a>
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarColor02" aria-controls="navbarColor02" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+
+  <div class="collapse navbar-collapse" id="navbarColor02">
+    <ul class="navbar-nav mr-auto">
+      <li class="nav-item active">
+        <a class="nav-link" href="#">Home
+          <span class="sr-only">(current)</span>
+        </a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="{{ path('user_index') }}">Afficher, modifier ou ajouter des comptes utilisateurs</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="{{ path('bank_account_index') }}">Créer, éditer, afficher et supprimer des comptes bancaires</a>
+      </li>
+        <li class="nav-item">
+            <a class="btn btn-danger" href="/logout">Se déconnecter</a>
+        </li>
+    </ul>
+  </div>
+</nav>
+
+
+<br><h1> Bonjour {{ app.user.firstname }} {{ app.user.lastname }} ({{ app.user.username }}) !</h1>
+
+        <p>Bienvenue sur l'espace administrateur de votre application bancaire.<br>Vous pouvez dès à présent consulter, modifier ou ajouter une nouvel utilisateur, ainsi que créer, afficher, éditer ou supprimer un compte bancaire.<br>Bonne navigation ! </p>
+
+{% endblock %}

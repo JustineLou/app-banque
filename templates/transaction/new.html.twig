@@ -1,0 +1,11 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Effectuer une transaction{% endblock %}
+
+{% block body %}
+    <h1>Effectuer une transaction</h1>
+
+    {{ include('transaction/_form.html.twig') }}
+
+    <a href="{{ path('transaction_index') }}">back to list</a>
+{% endblock %}

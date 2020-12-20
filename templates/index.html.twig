@@ -1,0 +1,124 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Index{% endblock %}
+
+{% block body %}
+
+{# PARTIE ADMIN #}
+{% if is_granted('ROLE_ADMIN') %}
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+    <a class="navbar-brand" href="#">Administration application bancaire</a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarColor02"
+        aria-controls="navbarColor02" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <div class="collapse navbar-collapse" id="navbarColor02">
+        <ul class="navbar-nav mr-auto">
+            <li class="nav-item">
+                <a class="btn btn-danger" href="/logout">Se déconnecter</a>
+            </li>
+        </ul>
+    </div>
+</nav>
+
+
+<h1 class="mt-3"> Bonjour {{ app.user.firstname }} {{ app.user.lastname }} ({{ app.user.username }}) !</h1>
+
+<p>Bienvenue sur l'espace administrateur de votre application bancaire.<br>Vous pouvez dès à présent consulter, modifier
+    ou ajouter une nouvel utilisateur, ainsi que créer, afficher, éditer ou supprimer un compte bancaire, mais aussi lier un compte bancaire à un utilisateur.<br>Bonne
+    navigation ! </p>
+    <ul>
+        <li><a href="{{ path('user_index') }}">Comptes utilisateurs</a><br>
+        <li><a href="{{ path('bank_account_index') }}">Comptes bancaires</a>
+        <li><a href="{{ path('user_bank_account_index') }}">Liason comptes bancaires/comptes utilisateurs</a>
+    </ul>
+
+
+
+{% endif %}
+
+{# PARTIE USER #}
+
+{% if is_granted('ROLE_USER') %}
+
+<div {% if is_granted('ROLE_ADMIN') %} class="d-none " {% endif %}>
+
+    <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
+        <a class="navbar-brand" href="#">Application bancaire</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarColor01"
+            aria-controls="navbarColor01" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <div class="collapse navbar-collapse" id="navbarColor01">
+            <ul class="navbar-nav mr-auto">
+
+
+
+                <li class="nav-item">
+                    <a class="btn btn-danger" href="/logout">Se déconnecter</a>
+                </li>
+            </ul>
+        </div>
+    </nav>
+
+    <h2 class="mt-3">Vos comptes bancaires</h2>
+    <table class="table">
+        <tbody>
+            <tr>
+                <th>IBAN</th>
+                <th>Solde</th>
+            </tr>
+            {% for bankAccountOwned in app.user.bankAccountOwned %}
+            <tr>
+                <td> {{ bankAccountOwned.bankaccount.iban }}</td>
+                <td> {{ bankAccountOwned.bankaccount.initialbalance}}</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table><br>
+
+
+    <h2>Vos bénéficiaires</h2>
+    <table class="table">
+        <tbody>
+            <tr>
+                <th>IBAN du bénéficiaire</th>
+            </tr>
+            {% for beneficiaries in app.user.beneficiaries %}
+            <tr>
+                <td> {{ beneficiaries.iban }}</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+    <button type="button" class="btn btn-secondary mb-5">Ajouter un bénéficiaire</button>
+
+
+    <h2>Vos transactions</h2>
+    <table class="table">
+        <tbody>
+            <tr>
+                <th>Compte débité</th>
+                <th>Compte crédité</th>
+                <th>Montant</th>
+            </tr>
+            {% for transactions in app.user.transactions %}
+            <tr>
+                <td> {{ transactions.debitedAccount }}</td>
+                <td> {{ transactions.creditedAccount}}</td>
+                <td> {{ transactions.amount}} €</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+    <button type="button" class="btn btn-secondary mb-5">Effectuer une transaction</button><br>
+
+
+
+    {% endif %}
+
+
+
+    {% endblock %}

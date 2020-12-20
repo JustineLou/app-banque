@@ -1,0 +1,11 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Ajouter un compte bancaire{% endblock %}
+
+{% block body %}
+    <h1>Ajouter un compte bancaire à un utilisateur</h1>
+
+    {{ include('bank_account/_form.html.twig') }}
+
+    <a href="{{ path('bank_account_index') }}">retour</a>
+{% endblock %}
