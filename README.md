@@ -10,7 +10,7 @@ This banking application has been made as part of a student project for which I 
 Put your database connection informations :  
 Update the line 32 of the ```.env``` file to put your database connection informations
 
-Start server :
+Start the symfony server :
 ```symfony server:start```
 
 Create the database :  
